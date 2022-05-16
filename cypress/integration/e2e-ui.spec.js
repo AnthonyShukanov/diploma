@@ -1,6 +1,6 @@
-const { base, login } = require('../support/po/PageMap')
-describe.skip('Тестирования возможности соединения', () => {
-    it('Алгоритм проверки соединения с веб-приложением', () => {
+const { base, login, github, dashboard } = require('../support/po/PageMap')
+describe('Тестирования возможности соединения', () => {
+    it('2.1 - Алгоритм проверки соединения с веб-приложением', () => {
         cy.log('Установка соединения с веб-приложением')
         base.openPage('https://reportportal.io/')
         cy.log('Проверка на совпадение адреса')
@@ -15,7 +15,24 @@ describe('Тестирование возможностей авторизаци
         cy.log('Проверка на совпадение адреса')
         base.url().should('include', 'reportportal.io')
     })
-    it('Алгоритм проверки возможности авторизации через сторонний сервис GitHub.com', () => {
+    it('2.2 - Алгоритм проверки возможности авторизации через сторонний сервис GitHub.com', () => {
+        cy.log('Проверка на существование и нажатие на кнопку "Login with Github"')
+        login.githubButton
+            .should('be.visible')
+            .click()
+        cy.log('Проверка на существование поля "Логин"')
+        github.loginField.should('be.visible')
+        cy.log('Команда написания в поле "Логин"')
+        github.loginField.type('default')
+        cy.log('Проверка на существование поля "Пароль"')
+        github.passwordField.should('be.visible')
+        cy.log('Команда написания в поле "Пароль"')
+        github.passwordField.type('1q2w3e')
+        cy.log('Нажатие на кнопку "Login"')
+        github.signInButton.click()
+        github.alertMessage().should('have.text', 'Cookies must be enabled to use GitHub.')
+    })
+    it('2.3 - Алгоритм проверки возможности авторизации с использованием логина и пароля.', () => {
         cy.log('Проверка на существование поля "Логин"')
         login.loginField.should('be.visible')
         cy.log('Команда написания в поле "Логин"')
@@ -30,5 +47,67 @@ describe('Тестирование возможностей авторизаци
         login.loginButton.click()
         cy.log('Проверка на совпадение адреса после перехода')
         base.url().should('include', 'personal')
+    })
+    
+})
+describe('Тестирование функции "Забыли пароль?"', () => {
+    beforeEach(() => {
+        cy.log('Установка соединения с веб-приложением')
+        base.openPage('https://demo.reportportal.io/ui/#login')
+        cy.log('Проверка на совпадение адреса')
+        base.url().should('include', 'reportportal.io')
+    })
+    it('2.4 - Алгоритм проверки возможности пользователя использования функции «Забыли пароль?»', () => {
+        cy.log('Проверка на существование кнопки "Forgot password?"')
+        login.forgotPassButton.should('be.visible')
+        cy.log('Нажатие на кнопку "Forgot password?"')
+        login.forgotPassButton.click()
+        cy.log('Проверка на совпадение адреса после перехода')
+        login.url().should('include', 'forgotPass=true')
+    })
+    it('2.4 - Алгоритм проверки возможности пользователя отмены использования функции «Забыли пароль?»', () => {
+        cy.log('Проверка на существование кнопки "Forgot password?"')
+        login.forgotPassButton.should('be.visible')
+        cy.log('Нажатие на кнопку "Forgot password?"')
+        login.forgotPassButton.click()
+        cy.log('Проверка на совпадение адреса после перехода')
+        login.url().should('include', 'forgotPass=true')
+        cy.log('Нажатие на кнопку "Cancel"')
+        login.cancelButton.click()
+        cy.log('Проверка на совпадение адреса после перехода')
+        login.url().should('include', '#login')
+    })
+})
+
+describe('Тестирование основного функционала профиля пользователя', () => {
+    beforeEach(() => {
+        cy.log('Установка соединения с веб-приложением')
+        base.openPage('https://demo.reportportal.io/ui/#login')
+        cy.log('Проверка на совпадение адреса')
+        base.url().should('include', 'reportportal.io')
+        cy.log('Проверка на существование поля "Логин"')
+        login.loginField.should('be.visible')
+        cy.log('Команда написания в поле "Логин"')
+        login.loginField.clear()
+        login.loginField.type('default')
+        cy.log('Проверка на существование поля "Пароль"')
+        login.passwordField.should('be.visible')
+        cy.log('Команда написания в поле "Пароль"')
+        login.passwordField.clear()
+        login.passwordField.type('1q2w3e')
+        cy.log('Нажатие на кнопку "Login"')
+        login.loginButton.click()
+    })
+    it('2.6 - Алгоритм проверки возможности пользователя выйти из профиля, посредством использования кнопки «logout»', () => {
+        cy.log('Проверка на совпадение адреса после перехода')
+        dashboard.url().should('include', '/launches')
+        cy.log('Нажатие на кнопку "Profile"')
+        dashboard.profileButton.click()
+        cy.log('Проверка на существование кнопки "Logout"')
+        dashboard.logoutButton.should('be.visible')
+        cy.log('Нажатие на кнопку "Logout"')
+        dashboard.logoutButton.contains('Logout', { matchCase: false }).click()
+        cy.log('Проверка на совпадение адреса после перехода')
+        dashboard.url().should('include', '#login')
     })
 })

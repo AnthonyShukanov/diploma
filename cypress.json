@@ -6,5 +6,6 @@
       "launch": "LAUNCH_NAME",
       "project": "PROJECT_NAME",
       "description": "LAUNCH_DESCRIPTION"
-    }
+    },
+    "chromeWebSecurity": false
   }

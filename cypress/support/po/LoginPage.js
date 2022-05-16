@@ -10,5 +10,14 @@ class LoginPage extends BasePage {
     get loginButton() {
         return cy.get('button[type*=submit]')
     }
+    get githubButton() {
+        return cy.get('button[type*=button]')
+    }
+    get forgotPassButton() {
+        return cy.get('[class*=forgot]')
+    }
+    get cancelButton() {
+        return cy.get('button[type="button"]')
+    }
 }
 module.exports = LoginPage
