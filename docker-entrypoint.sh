@@ -5,7 +5,6 @@
 # reports is complete.
 
 # Get secrets (cypress.json)
-node getAwsSecrets.js
 
 waitall() {
     echo "Sending results to Report Portal"

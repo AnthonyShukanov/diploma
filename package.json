@@ -4,6 +4,7 @@
   "description": "Automation testing system for web-apps with continuous integration",
   "main": "index.js",
   "dependencies": {
+    "@reportportal/agent-js-cypress": "^5.0.3",
     "cypress": "^9.6.1"
   },
   "devDependencies": {},
