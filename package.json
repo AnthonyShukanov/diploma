@@ -1,0 +1,23 @@
+{
+  "name": "diploma",
+  "version": "1.0.0",
+  "description": "Automation testing system for web-apps with continuous integration",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^9.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthonyShukanov/diploma.git"
+  },
+  "author": "Shukanau Anton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnthonyShukanov/diploma/issues"
+  },
+  "homepage": "https://github.com/AnthonyShukanov/diploma#readme"
+}
