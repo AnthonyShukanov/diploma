@@ -8,7 +8,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "npx cypress open"
+    "dev": "npx cypress open",
+    "test": "npx cypress run"
   },
   "repository": {
     "type": "git",
