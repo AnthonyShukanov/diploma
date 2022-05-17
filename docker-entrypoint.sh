@@ -1,10 +1,7 @@
 #!/bin/bash
-
 # Sometimes the Cypress executable can end before the tests are reported
 # This function prevents the Docker container to close before this pushing of
 # reports is complete.
-
-# Get secrets (cypress.json)
 
 waitall() {
     echo "Sending results to Report Portal"
@@ -20,8 +17,6 @@ waitall() {
 }
 
 npx cypress run
-
 # Wait for Cypress to finish sending the results to reportPortal
 waitall $(pidof Cypress)
-
 echo "Test completed and report sent"

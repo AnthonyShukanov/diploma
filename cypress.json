@@ -1,3 +1,11 @@
 {
+  "reporter": "@reportportal/agent-js-cypress",
+  "reporterOptions": {
+    "endpoint": "http://localhost:8080/api/v1",
+    "token": "6ae07b34-b147-48cf-893b-80be4079001f",
+    "launch": "Cypress",
+    "project": "diploma",
+    "autoMerge": true
+  },
   "chromeWebSecurity": false
 }
