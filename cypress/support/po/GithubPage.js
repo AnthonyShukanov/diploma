@@ -1,4 +1,5 @@
 const BasePage = require('../po/BasePage')
+
 class GithubPage extends BasePage {
     alertMessage() {
         return cy.get('body')

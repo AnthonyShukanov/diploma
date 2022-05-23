@@ -1,5 +1,5 @@
 const { base, login, github, dashboard } = require('../support/po/PageMap')
-describe('Тестирования возможности соединения', () => {
+describe('Тестирование возможности соединения', () => {
     it('2.1 - Алгоритм проверки соединения с веб-приложением', () => {
         cy.log('Установка соединения с веб-приложением')
         base.openPage('https://reportportal.io/')
